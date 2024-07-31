@@ -27,7 +27,7 @@ function App() {
     'The only way to go fast, is to go well.'
   ]
   const [selected,setSelected]=useState(0);
-  const [votes,setVote]=useState(Array(anecdotes.length).fill(6));
+  const [votes,setVote]=useState(Array(anecdotes.length).fill(0));
 
   const handleSelected=()=>{
     setSelected(Math.floor(Math.random()*anecdotes.length));
