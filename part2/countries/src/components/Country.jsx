@@ -1,5 +1,5 @@
 const Country=({country})=>{
-    Object.keys(country.languages).forEach(x=>console.log(x))
+    
     return(
         <div>
             <h1>{country.name.common}</h1>

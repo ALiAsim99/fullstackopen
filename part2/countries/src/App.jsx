@@ -6,11 +6,19 @@ import Filter from './components/Filter'
 import axios from 'axios'
 import { useEffect } from 'react'
 import Country from './components/Country'
+import Countries from './components/Countries'
 function App() {
 
   const[countries,setCountries]=useState([]);
   const[filter,setFilter]=useState('')
+  const[show,setShow]=useState(false);
 
+  const handleShow=(e)=>{
+   
+        setFilter(e)
+ 
+      
+  }
   useEffect(()=>{
       axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
       .then(res=>{
@@ -19,12 +27,12 @@ function App() {
       })
   },[])
 
-  const filterCountries=countries==[]?[]:countries.filter(c=>c.name.common.toLowerCase().includes(filter.toLowerCase()))
-  console.log(filterCountries)
   const handleFilter=(e)=>{
     setFilter(e.target.value);
   }
-
+  console.log(countries)
+  const filterCountries=countries==[]?[]:countries.filter(c=>c.name.common.toLowerCase().includes(filter.toLowerCase()))
+  console.log(filterCountries)
 
   return(
     <>
@@ -35,10 +43,7 @@ function App() {
       {filterCountries.length>10?(
         <p>Too many matches specify another filter</p>
       ):filterCountries.length==1?(<Country country={filterCountries[0]}/>) :filterCountries.length<10?(
-        <ul>
-          {filterCountries.map(country=><li key={country.cca3}>{country.name.common}</li>)}
-        </ul>
-      ) :<p></p>}
+ <Countries  countries={filterCountries} handleShow={handleShow}/>) :<p></p>}
      </div>
     </>
   )
